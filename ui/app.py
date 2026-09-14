@@ -107,7 +107,7 @@ if prompt := st.chat_input("Ask about your documentation..."):
                 except Exception as e:
                     logfire.error(f"❌ UI-Backend Connection Failed: {e}")
                     status.update(label="❌ Connection Failed", state="error")
-                    st.error("Backend Offline.")
+                    st.error(f"Backend Error: {e}")
                     st.stop()
 
             # Final Answer Streaming
