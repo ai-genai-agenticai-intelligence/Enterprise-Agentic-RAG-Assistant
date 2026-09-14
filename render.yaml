@@ -1,0 +1,36 @@
+services:
+  # --- 1. FASTAPI BACKEND SERVICE ---
+  - type: web
+    name: enterprise-rag-backend
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_FALLBACK_API_KEY
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: QDRANT_CLUSTER_ENDPOINT
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LOGFIRE_TOKEN
+        sync: false
+
+  # --- 2. STREAMLIT UI SERVICE ---
+  - type: web
+    name: enterprise-rag-ui
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: streamlit run ui/app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BACKEND_URL
+        sync: false
+      - key: LOGFIRE_TOKEN
+        sync: false
