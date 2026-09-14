@@ -15,14 +15,10 @@ load_dotenv(dotenv_path=env_path)
 # Initialize Logfire
 try:
     token = os.getenv("LOGFIRE_TOKEN")
-    if not token:
-        print("ERROR: LOGFIRE_TOKEN is empty or None!")
-    logfire.configure(token=token)
-    # logfire.instrument_requests() # Disabled due to OpenTelemetry bug on Windows: MeterProvider.get_meter() got multiple values for argument 'version'
-    LOGFIRE_STATUS = "Connected & Tracing"
+    logfire.configure(token=token, send_to_logfire="if-token-present")
+    LOGFIRE_STATUS = "Connected & Tracing" if token else "Local Standby (No Token)"
 except Exception as e:
-    print(f"Logfire Init Error in UI: {e}")
-    LOGFIRE_STATUS = f"Standby (Error: {e})"
+    LOGFIRE_STATUS = f"Standby ({e})"
     
 
 

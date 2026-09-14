@@ -11,7 +11,7 @@ if sys.platform == "win32":
         pass
 
 load_dotenv()
-logfire.configure(token=os.getenv("LOGFIRE_TOKEN"))
+logfire.configure(token=os.getenv("LOGFIRE_TOKEN"), send_to_logfire="if-token-present")
 
 # Now safe to import app modules - logfire is already active
 from fastapi import FastAPI, Response
