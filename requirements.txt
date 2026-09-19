@@ -12,6 +12,12 @@ numpy                       # Numerical processing
 pytz                        # Timezone handling for logs
 nest-asyncio                # Support for nested async loops in notebooks/streamlit
 
+# --- GOOGLE CORE & DEPENDENCY RESOLVER PINS ---
+google-api-core>=2.19.0
+google-cloud-core>=2.4.1
+google-auth>=2.29.0
+google-cloud-bigquery>=3.25.0
+
 # --- GEMINI EMBEDDINGS ---
 google-generativeai         # Gemini API — embeddings (text-embedding-004 / gemini-embedding-001)
 langchain-google-genai      # LangChain integration for Gemini models
@@ -24,7 +30,6 @@ flashrank                   # Ultra-fast local cross-encoder for semantic rerank
 langchain                   # Core LLM orchestration
 langgraph                   # State-machine logic for cyclic agent flows
 langchain-groq              # Integration for lightning-fast Llama 3.3 models
-google-cloud-bigquery>=3.25.0 # Prevent pip resolver from backtracking to legacy broken wheels
 langchain-google-vertexai   # Required shim for NeMo Guardrails internal import (no GCP credentials needed)
 langchain-community         # Community-contributed tools and loaders
 langchain-openai            # OpenAI-compatible layer (used by Portkey gateway)
