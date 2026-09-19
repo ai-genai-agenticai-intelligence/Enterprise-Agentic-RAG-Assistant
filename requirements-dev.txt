@@ -1,0 +1,11 @@
+# ==============================================================================
+# ENTERPRISE AGENTIC RAG - DEV / EVALUATION REQUIREMENTS
+# ==============================================================================
+ragas
+deepeval
+langfuse
+unstructured
+python-pptx
+python-docx
+pdfplumber
+sentence-transformers
