@@ -85,7 +85,6 @@ if prompt := st.chat_input("Ask about your documentation..."):
                 try:
                     # DISTRIBUTED TRACE: Calling Backend
                     with logfire.span("📡 Calling RAG Backend"):
-                        # Get backend URL from env, or default to local if not set
                         base_url = os.getenv("BACKEND_URL", "http://localhost:8000")
                         url = f"{base_url}/query"
                         payload = {"q": prompt, "thread_id": st.session_state.session_id}
