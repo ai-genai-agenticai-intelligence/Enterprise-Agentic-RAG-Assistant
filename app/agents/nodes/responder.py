@@ -120,8 +120,15 @@ def generate_node(state: AgentState):
                     break
 
         if content is None:
-            logfire.error(f"❌ All LLM generation attempts failed: {last_error}")
-            raise last_error
+            err_msg = str(last_error) if last_error else "All LLM generation attempts failed."
+            logfire.error(f"❌ All LLM generation attempts failed: {err_msg}")
+            fallback_answer = "I apologize, but I am currently unable to generate a response due to high traffic on our upstream AI providers. Please try again in a few moments."
+            return {
+                "final_answer": fallback_answer,
+                "status": "Service temporarily degraded.",
+                "plan": state.get("plan", []) + ["Generation Failed (Rate Limit)"],
+                "messages": [{"role": "assistant", "content": fallback_answer}]
+            }
 
         if is_cache_hit:
             logfire.info("⚡ Gateway Cache Hit — response served from Portkey cache.")
